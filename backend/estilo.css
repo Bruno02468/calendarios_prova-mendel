@@ -17,11 +17,11 @@ hr {
     color: #5FFF57;
 }
 
-a {
+a, a * {
     color: #5FFF57;
 }
 
-a:hover {
+a:hover, a:hover * {
     color: #3DFF33;
 }
 
@@ -346,12 +346,16 @@ tt, code, kbd, samp {
     background: #00ed4f;
     background-image: linear-gradient(to bottom, #00ed4f, #00a806);
     border-radius: 50px;
-    color: black;
+    color: black !important;
     font-size: 15px;
     padding: 5px 10px 5px 10px;
     text-decoration: none;
     border-bottom: 10px;
     line-height: 20px;
+}
+
+.buttonlink *, .buttonlink:hover * {
+    color: black;
 }
 
 .buttonlink:hover {

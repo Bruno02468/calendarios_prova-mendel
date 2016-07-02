@@ -4,7 +4,7 @@ include("../backend/sistema.php");
 
 require_login();
 
-$guid = req_post("guid");
+$guid = req_get("guid");
 $votacao = getVotacoes()[$guid];
 
 

@@ -10,13 +10,13 @@ foreach ($votacoes as $guid => $votacao) {
     $ano = $votacao["ano"];
     $etapa = $votacao["etapa"];
     $periodo = $votacao["periodo"];
-    $fin = "";
-    if (time() > $votacao["termina"]) {
+    $fin = " <i>(em andamento)</i>";
+    if (time() > strtotime($votacao["termina"])) {
         $fin = " (FINALIZADA - <a href=\"../resultados.php?votid=$guid\">ver resultados</a>)";
     }
     $links .= "Votação do ${ano}º Ano - ${etapa}ª Etapa do ${periodo}º Período$fin<br>
-        <a href=\"editar_votacao?guid=$guid\" class=\"buttonlink btnblue smallbtn\">editar</a> ou
-        <a href=\"atuadores/deleta_votacao?guid=$guid\" class=\"buttonlink btnred smallbtn\">deletar</a><br>";
+        <a href=\"editar_votacao.php?guid=$guid\" class=\"buttonlink btnblue smallbtn\">editar</a> ou
+        <a href=\"atuadores/deleta_votacao.php?guid=$guid\" class=\"buttonlink btnred smallbtn\">deletar</a><br><br>";
 }
 
 ?>
@@ -40,11 +40,28 @@ foreach ($votacoes as $guid => $votacao) {
                 <br>
                 Iniciar uma votação:<br>
                 <br>
-                <form method="POST" action="atuadores/add_votacao.php">
+                <form method="POST" action="atuadores/adiciona_votacao.php">
                     Informações essenciais:<br>
-                    Ano: <input type="number" min="1" max="3" name="ano"><br>
-                    Etapa: <input type="number" min="1" max="2" name="etapa"><br>
-                    Período: <input type="number" min="1" max="4" name="periodo"><br>
+                    Ano:
+                    <select name="ano">
+                        <option value="1">1°</option>
+                        <option value="2">2°</option>
+                        <option value="2">3°</option>
+                    </select>
+                    <br>
+                    Período:
+                    <select name="periodo">
+                        <option value="1">1°</option>
+                        <option value="2">2°</option>
+                        <option value="3">3°</option>
+                        <option value="4">4°</option>
+                    </select>
+                    <br>
+                    Etapa:
+                    <select name="etapa">
+                        <option value="1">1ª</option>
+                        <option value="2">2ª</option>
+                    </select>
                     <br>
                     Período de votação:<br>
                     Começa: <input type="date" name="comeca"><br>
@@ -60,7 +77,7 @@ foreach ($votacoes as $guid => $votacao) {
                 </form>
                 Votações existentes:<br>
                 <br>
-                <?php echo $editlinks; ?>
+                <?php echo $links; ?>
             </div>
         </center>
     </body>
