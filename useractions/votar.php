@@ -33,48 +33,23 @@ if (isset($_GET["err"])) $err = $_GET["err"];
 ?>
 <html>
     <head>
-        <title>Criar Calendário</title>
+        <title>Confirmar dados</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../backend/estilo.css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
     <body style="text-align: center;">
-        <h1>Criar um Calendário</h1>
+        <h1>Confirme seus dados!</h1>
         <small>
             Programado e idealizado por <a href="//licoes.com/licao/contato.html">
             Bruno Borges Paschoalinoto</a> (ou Borginhos)
         </small>
         <br>
         <br>
-        <br>
-        Ninguém sugeriu um calendário de que você gostou?<br>
-        Sem problema, crie o seu próprio!<br>
-        <br>
-        <br>
-        <form method="POST" action="atuadores/cria.php" onsubmit="return checar();">
-            <div class="diamaker" id="dia1">
-                <div>Dia <?php echo date("d/m", strtotime($votacao["dias"][0])); ?></div>
-            </div>
+        <form method="POST" action="atuadores/vota.php" onsubmit="salvar()" id="form">
             <br>
-            <br>
-            <div class="diamaker" id="dia2">
-                <div>Dia <?php echo date("d/m", strtotime($votacao["dias"][1])); ?></div>
-            </div>
-            <br>
-            <br>
-            <div class="diamaker" id="dia3">
-                <div>Dia <?php echo date("d/m", strtotime($votacao["dias"][2])); ?></div>
-            </div>
-            <br>
-            <br>
-            <div class="diamaker" id="dia4">
-                <div>Dia <?php echo date("d/m", strtotime($votacao["dias"][3])); ?></div>
-            </div>
-            <br>
-            <br>
-            <br>
-            Confirme seus dados de aluno:<br>
+            Confirme seus dados de aluno para votar:<br>
             <br>
             <table class="alunoform">
                 <tr>
@@ -95,15 +70,36 @@ if (isset($_GET["err"])) $err = $_GET["err"];
                 </tr>
             </table>
             <br>
-            <br>
             <input type="hidden" name="guid" value="<?php echo req_get("votid"); ?>">
+            <input type="hidden" name="autor" value="<?php echo req_get("autor"); ?>">
+            <input type="hidden" name="opiniao" value="<?php echo req_get("opiniao"); ?>">
             <div id="err"><?php echo $err; ?>&nbsp;</div>
-            <input class="buttonlink bigbtn" type="submit" value="Enviar!">
+            <input class="buttonlink bigbtn" type="submit" value="Votar!">
         </form>
         <script>
-            var materias = [];
-            <?php echo $js; ?>
+            if (window.localStorage) {
+                var c = 0;
+                if (localStorage["sala"]) {
+                    document.getElementById("sala").value = localStorage["sala"];
+                }
+                if (localStorage["numero"]) {
+                    document.getElementById("chamada").value = localStorage["numero"];
+                }
+                if (localStorage["moodle"]) {
+                    document.getElementById("moodle").value = localStorage["moodle"];
+                }
+                if (localStorage["primeironome"]) {
+                    document.getElementById("nome").value = localStorage["primeironome"];
+                }
+            }
+            function salvar() {
+                if (window.localStorage) {
+                    localStorage["sala"] = document.getElementById("sala").value;
+                    localStorage["numero"] = document.getElementById("chamada").value;
+                    localStorage["moodle"] = document.getElementById("moodle").value;
+                    localStorage["primeironome"] = document.getElementById("nome").value;
+                }
+            }
         </script>
-        <script src="maker.js"></script>
     </body>
 </html>

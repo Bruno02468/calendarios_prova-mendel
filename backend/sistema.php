@@ -236,7 +236,10 @@ function addVotacao($assoc) {
     setVotacoes($json);
 }
 
-function setCalendarioOnVotacao($guid, $autor, $assoc) {
-    $json = getVotacoes();
-    $json["calendarios"][$autor] = $assoc;
+function getSalas() {
+    return array(
+        "1A", "1B", "1C", "1D", "1E", "1F", "1G", "1H", "1I",
+        "2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H",
+        "3A", "3B", "3C", "3D", "3E", "3F", "3G"
+    );
 }

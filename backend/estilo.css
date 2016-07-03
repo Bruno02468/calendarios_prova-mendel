@@ -436,6 +436,50 @@ tt, code, kbd, samp {
     padding: 1px;
 }
 
+.diamaker {
+    border: 2px solid #D1FFD6;
+    display: inline-block;
+    width: fixed;
+}
+
+.diamaker div:first-child {
+    border-bottom: 1px solid #D1FFD6;
+    padding: 4px;
+}
+
+.diamaker select {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.alunoform {
+    display: inline-block;
+}
+
+#err {
+    color: red;
+    font-weight: bold;
+}
+
+.sugestao {
+    display: inline-block;
+}
+
+.sugestao .diamaker {
+    width: 100%;
+}
+
+.sugestao .diamaker .materias {
+    padding: 4px;
+}
+
+table {
+    display: inline-block;
+}
+
 * {
     color: #D1FFD6;
     font-family: 'Open Sans', sans-serif;
