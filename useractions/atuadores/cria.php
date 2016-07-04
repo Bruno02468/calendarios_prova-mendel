@@ -2,16 +2,15 @@
 
 include("../../backend/sistema.php");
 
-$guid = req_post("guid");
-
 $votacoes = getVotacoes();
-$votacao = $votacoes[$guid];
 
 function fail($str) {
     $guid = req_post("guid");
+    $str = urlencode($str);
     redir("../criar.php?votid=$guid&err=$str");
 }
 
+$guid = req_post("guid");
 $moodle = req_post("alunid");
 $ano = req_post("sala")[0];
 $sala = req_post("sala")[1];
@@ -20,7 +19,11 @@ $primeiro_nome = req_post("primeironome");
 
 if (!alunoCorreto($primeiro_nome, $ano, $sala, $chamada, $moodle)) fail("Dados de aluno incorretos!");
 
-if ($votacao["ano"] != $ano) fail("Você não é do " . $votacao["ano"] . "º ano!");
+if ($votacoes[$guid]["ano"] != $ano) fail("Você não é do " . $votacoes[$guid]["ano"] . "º ano!");
+
+if (isset($votacoes[$guid]["calendarios"][$moodle])) {
+    fail("Você já sugeriu um calendário para essa votação!");
+}
 
 $dias = array();
 for ($dia = 1; $dia <= 4; $dia++) {
@@ -28,6 +31,21 @@ for ($dia = 1; $dia <= 4; $dia++) {
     for ($selector = 1; $selector <= 3; $selector ++) {
         $sel = req_post("dia-$dia-$selector");
         if ($sel !== "none") array_push($dias[$dia-1], $sel);
+    }
+}
+
+foreach ($votacoes[$guid]["calendarios"] as $calendario) {
+    $autor = $calendario["autor"];
+    $iguais = true;
+    for ($dia = 0; $dia < 4; $dia++) {
+        if ($dias[$dia] !== $calendario["dias"][$dia]) {
+            $iguais = false;
+            break;
+        }
+    }
+    if ($iguais) {
+        fail("Um <a href=\"../votacao.php?guid=$guid#$autor\">calendário equivalente</a> já existe!");
+        break;
     }
 }
 

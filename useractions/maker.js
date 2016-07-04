@@ -144,6 +144,8 @@ function checar() {
     if (window.localStorage) {
         localStorage["moodle"] = document.getElementById("moodle").value;
         localStorage["primeironome"] = document.getElementById("nome").value;
+        localStorage["sala"] = document.getElementById("sala").value;
+        localStorage["numero"] = document.getElementById("chamada").value;
     }
     return true;
 }

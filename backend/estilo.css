@@ -459,9 +459,13 @@ tt, code, kbd, samp {
     display: inline-block;
 }
 
-#err {
+#err, #err * {
     color: red;
     font-weight: bold;
+}
+
+#err a {
+    color: salmon;
 }
 
 .sugestao {
@@ -474,6 +478,27 @@ tt, code, kbd, samp {
 
 .sugestao .diamaker .materias {
     padding: 4px;
+}
+
+.vot {
+    font-weight: bold;
+}
+
+.vot td {
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+.bom td {
+    color: #67F03A;
+}
+
+.aceitavel td {
+    color: #F5901D;
+}
+
+.ruim td {
+    color: #FF3030;
 }
 
 table {

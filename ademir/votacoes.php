@@ -12,7 +12,7 @@ foreach ($votacoes as $guid => $votacao) {
     $periodo = $votacao["periodo"];
     $fin = " <i>(em andamento)</i>";
     if (time() > strtotime($votacao["termina"])) {
-        $fin = " (FINALIZADA - <a href=\"../resultados.php?votid=$guid\">ver resultados</a>)";
+        $fin = " (FINALIZADA - <a href=\"../resultados.php?guid=$guid\">ver resultados</a>)";
     }
     $links .= "Votação do ${ano}º Ano - ${etapa}ª Etapa do ${periodo}º Período$fin<br>
         <a href=\"editar_votacao.php?guid=$guid\" class=\"buttonlink btnblue smallbtn\">editar</a> ou
@@ -27,6 +27,7 @@ foreach ($votacoes as $guid => $votacao) {
         <link rel="stylesheet" type="text/css" href="../backend/estilo.css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     </head>
     <body>
         <center>

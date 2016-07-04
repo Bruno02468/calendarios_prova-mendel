@@ -2,11 +2,9 @@
 
 include("../../backend/sistema.php");
 
-$guid = req_post("guid");
-
 $votacoes = getVotacoes();
-$votacoes[$guid] = $votacoes[$guid];
 
+$guid = req_post("guid");
 $autor = req_post("autor");
 $opiniao = req_post("opiniao");
 $possiveis = array("bom", "aceitavel", "ruim");
