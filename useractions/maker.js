@@ -12,7 +12,7 @@ var dia1 = document.getElementById("dia1");
 var dia2 = document.getElementById("dia2");
 var dia3 = document.getElementById("dia3");
 var dia4 = document.getElementById("dia4");
-var emptyOption = "<option value=\"none\">--------------------------</option>";
+var emptyOption = "<option value=\"none\">- - - - - - - - - - - - - - - - -</option>";
 
 
 function getMateriaByNome(nome) {

@@ -243,3 +243,26 @@ function getSalas() {
         "3A", "3B", "3C", "3D", "3E", "3F", "3G"
     );
 }
+
+function ordenarCalendarios($arr) {
+    uasort($arr, function($a, $b) {
+        $a_bom = count($a["bom"]);
+        $b_bom = count($b["bom"]);
+        $a_aceitavel = count($a["aceitavel"]);
+        $b_aceitavel = count($b["aceitavel"]);
+        $a_ruim = count($a["ruim"]);
+        $b_ruim = count($b["ruim"]);
+        if ($a_bom > $b_bom) return -1;
+        if ($a_bom < $b_bom) return 1;
+        if ($a_bom == $b_bom) {
+            if ($a_aceitavel > $b_aceitavel) return -1;
+            if ($a_aceitavel < $b_aceitavel) return 1;
+            if ($a_aceitavel == $b_aceitavel) {
+                if ($a_ruim < $b_ruim) return -1;
+                if ($a_ruim > $b_ruim) return 1;
+            }
+        }
+        return 0;
+    });
+    return $arr;
+}

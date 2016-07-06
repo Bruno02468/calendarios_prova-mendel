@@ -20,13 +20,18 @@ foreach ($votacoes as $guid => $votacao) {
     $diasleft = ceil($timeleft / 86400);
     
     if ($timeleft > 0) {
-        $vots .= "<a class=\"buttonlink bigbtn\" href=\"votacao.php?guid=$guid\">$anostamp</a>
-        <br><br>($diasleft dias restantes para votar)<br><br><br>";
+        $vots .= "<a class=\"buttonlink bigbtn\" href=\"votacao.php?guid=$guid\">$anostamp</a><br><br>";
+        if ($diasleft == 1) {
+            $vots .= "(<b>último dia para votar!</b>)";
+        } else {
+            $vots .= "($diasleft dias restantes para votar)<br><br><br>";
+        }
+        
+        
     } else {
-        $vots .= "<a class=\"buttonlink btnorange bigbtn\" href=\"votacao.php?guid=$guid\">$anostamp</a>
+        $vots .= "<a class=\"buttonlink btnorange bigbtn\" href=\"resultados.php?guid=$guid\">$anostamp</a>
         <br><br>(ver resultado)<br><br><br>";
     }
-    
 }
 
 if ($vots == "") $vots = "<i>Nenhuma votação ativa agora.</i>"
@@ -42,6 +47,7 @@ if ($vots == "") $vots = "<i>Nenhuma votação ativa agora.</i>"
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     </head>
     <body style="text-align: center;">
+        <?php include_once("backend/analytics.php") ?>
         <h1>Votações para os Calendários de Prova</h1>
         <small>
             Programado e idealizado por <a href="//licoes.com/licao/contato.html">

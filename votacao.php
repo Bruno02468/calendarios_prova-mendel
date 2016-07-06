@@ -8,8 +8,11 @@ $ano = $votacao["ano"];
 $periodo = $votacao["periodo"];
 $etapa = $votacao["etapa"];
 $dias = $votacao["dias"];
+$calendarios = ordenarCalendarios($votacao["calendarios"]);
 
-$calendarios = $votacao["calendarios"];
+if (strtotime($votacao["termina"]) < time()) {
+    redir("resultados.php?guid=$guid");
+}
 
 $final = "";
 if (count($calendarios) == 0) {
@@ -18,7 +21,6 @@ if (count($calendarios) == 0) {
 } else {
     $final = "<a class=\"buttonlink btngreen\" href=\"useractions/criar.php?votid=$guid\">
         Sugerir um calendário</a><br><br><br>";
-
     foreach ($calendarios as $moodle => $calendario) {
         $n = 0;
         $autor = getAlunos()[$moodle];
@@ -49,13 +51,15 @@ if (count($calendarios) == 0) {
             <tr style=\"text-align: center;\"><td>$b</td><td>$a</td><td>$r</td></tr>
         </table><br><br><hr>";
     }
+    $final .= "<br>Nenhum desses calendários ficou bom?<br>
+        Sem problema, <a href=\"useractions/criar.php?votid=$guid\">crie o seu próprio</a>!<br><br>";
 }
 
 
 ?>
 <html>
     <head>
-        <title>Votação do <?php echo $ano; ?>º ano</title>
+        <title>Votação do <?php echo $ano; ?>º Ano</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="backend/estilo.css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -63,7 +67,8 @@ if (count($calendarios) == 0) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     </head>
     <body style="text-align: center;">
-        <h1>Votação do <?php echo $ano; ?>º ano</h1>
+        <?php include_once("backend/analytics.php") ?>
+        <h1>Votação do <?php echo $ano; ?>º Ano</h1>
         <small>
             Programado e idealizado por <a href="//licoes.com/licao/contato.html">
             Bruno Borges Paschoalinoto</a> (ou Borginhos)

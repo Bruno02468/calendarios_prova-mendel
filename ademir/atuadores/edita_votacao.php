@@ -16,11 +16,13 @@ $votacoes[$guid] = array(
     "ano" => req_post("ano"),
     "etapa" => req_post("etapa"),
     "periodo" => req_post("periodo"),
-    "comeca" => req_post("ano"),
-    "termina" => req_post("ano"),
+    "comeca" => req_post("comeca"),
+    "termina" => req_post("termina"),
     "dias" => array($dia1, $dia2, $dia3, $dia4),
     "calendarios" => $votacoes[$guid]["calendarios"]
 );
+
+setVotacoes($votacoes);
 
 redir("../votacoes.php");
 

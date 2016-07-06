@@ -17,6 +17,10 @@ $sala = req_post("sala")[1];
 $chamada = req_post("chamada");
 $primeiro_nome = req_post("primeironome");
 
+if (strtotime($votacoes[$guid]["termina"]) < time()) {
+    fail("Essa votação já terminou! <a href=\"../../resultados.php?guid=$guid\">Veja os resultados!</a>");
+}
+
 if (!alunoCorreto($primeiro_nome, $ano, $sala, $chamada, $moodle)) fail("Dados de aluno incorretos!");
 
 if ($votacoes[$guid]["ano"] != $ano) fail("Você não é do " . $votacoes[$guid]["ano"] . "º ano!");

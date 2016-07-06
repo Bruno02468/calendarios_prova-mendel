@@ -30,7 +30,7 @@ $votacao = getVotacoes()[$guid];
                 <br>
                 Iniciar uma votação:<br>
                 <br>
-                <form method="POST" action="atuadores/add_votacao.php">
+                <form method="POST" action="atuadores/edita_votacao.php">
                     Informações essenciais:<br>
                     Ano: <input type="number" min="1" max="3" name="ano" value="<?php echo $votacao["ano"]; ?>"><br>
                     Etapa: <input type="number" min="1" max="2" name="etapa" value="<?php echo $votacao["etapa"]; ?>"><br>
@@ -46,6 +46,7 @@ $votacao = getVotacoes()[$guid];
                     3º: <input type="date" name="dia3" value="<?php echo $votacao["dias"][2]; ?>"><br>
                     4º: <input type="date" name="dia4" value="<?php echo $votacao["dias"][3]; ?>"><br>
                     <br>
+                    <input type="hidden" value="<?php echo $guid; ?>" name="guid">
                     <input class="buttonlink btnblue" type="submit" value="Salvar alterações">
                 </form>
             </div>

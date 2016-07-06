@@ -9,11 +9,15 @@ $autor = req_post("autor");
 $opiniao = req_post("opiniao");
 $possiveis = array("bom", "aceitavel", "ruim");
 
-if (!in_array($opiniao, $possiveis)) fail("Hackear é feio!");
-
 function fail($str) {
     $guid = req_post("guid");
     redir("../votar.php?votid=$guid&autor=$autor&opiniao=$opiniao&err=$str");
+}
+
+if (!in_array($opiniao, $possiveis)) fail("Hackear é feio!");
+
+if (strtotime($votacoes[$guid]["termina"]) < time()) {
+    fail("Essa votação já terminou! <a href=\"../../resultados.php?guid=$guid\">Veja os resultados!</a>");
 }
 
 $moodle = req_post("alunid");

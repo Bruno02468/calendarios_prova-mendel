@@ -8,42 +8,44 @@ $ano = $votacao["ano"];
 $periodo = $votacao["periodo"];
 $etapa = $votacao["etapa"];
 $dias = $votacao["dias"];
+$calendarios = ordenarCalendarios($votacao["calendarios"]);
+$alunos = getAlunos();
 
-$calendarios = $votacao["calendarios"];
-uasort($calendarios, function($a, $b) {
-    $a_bom = count($a["bom"]);
-    $b_bom = count($b["bom"]);
-    $a_aceitavel = count($a["aceitavel"]);
-    $b_aceitavel = count($b["aceitavel"]);
-    $a_ruim = count($a["ruim"]);
-    $b_ruim = count($b["ruim"]);
-    if ($a_bom > $b_bom) return -1;
-    if ($a_bom < $b_bom) return 1;
-    if ($a_bom == $b_bom) {
-        if ($a_aceitavel > $b_aceitavel) return -1;
-        if ($a_aceitavel < $b_aceitavel) return 1;
-        if ($a_aceitavel == $b_aceitavel) {
-            if ($a_ruim < $b_ruim) return -1;
-            if ($a_ruim > $b_ruim) return 1;
-        }
-    }
-    return 0;
-});
+if (strtotime($votacao["termina"]) > time()) {
+    redir("votacao.php?guid=$guid");
+}
 
+$totalano = 0;
+foreach ($alunos as $moodle => $aluno) {
+    if ($aluno["ano"] == $ano) $totalano++;
+}
+
+$opinioes = array("bom", "aceitavel", "ruim");
+$votaram = array();
+$criaram = array();
 $final = "";
 if (count($calendarios) == 0) {
     $final = "Nenhum calendário foi sugerido.";
 } else {
-    $final = "Calendários mais bem-avaliados:<br><br>";
+    $final = "Os calendários sugeridos, começando pelos mais bem-avaliados:<br><br><hr>";
     foreach ($calendarios as $moodle => $calendario) {
         $n = 0;
-        $autor = getAlunos()[$moodle];
+        $autor = $alunos[$moodle];
+        array_push($criaram, $moodle);
         $nome = $autor["nome"];
         $sala = $autor["ano"] . "º " . $autor["sala"];
-        $final .= "Sugestão de <b>$nome</b> ($sala):<br><br><div class=\"sugestao\" id=\"$moodle\">";
+        $final .= "Enviado por <b>$nome</b> ($sala):<br><br><div class=\"sugestao\" id=\"$moodle\">";
         $b = count($calendario["bom"]);
         $a = count($calendario["aceitavel"]);
         $r = count($calendario["ruim"]);
+        
+        foreach ($opinioes as $opiniao) {
+            foreach ($calendario[$opiniao] as $vmoodle) {
+                if (!in_array($vmoodle, $votaram)) {
+                    array_push($votaram, $vmoodle);
+                }
+            }
+        }
 
         foreach ($dias as $dia) {
             $dat = date("d/m", strtotime($dia));
@@ -62,6 +64,8 @@ if (count($calendarios) == 0) {
     }
 }
 
+$totalvotaram = count($votaram);
+$totalcriaram = count($criaram);
 
 ?>
 <html>
@@ -74,6 +78,7 @@ if (count($calendarios) == 0) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     </head>
     <body style="text-align: center;">
+        <?php include_once("backend/analytics.php") ?>
         <h1>Resultados da Votação</h1>
         <small>
             Programado e idealizado por <a href="//licoes.com/licao/contato.html">
@@ -82,8 +87,12 @@ if (count($calendarios) == 0) {
         <br>
         <br>
         <br>
-        Esses resultados serão usada para definir o calendário de provas para a
-        <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br>
+        Estes resultados serão usados para definir o calendário de provas para a
+        <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br><br>
+        <br>
+        Dos <b><?php echo $totalano; ?></b> alunos do ano, <b><?php echo $totalvotaram ?></b> 
+        votaram em pelo menos um calendário, e <b><?php echo $totalcriaram; ?></b>
+        enviaram seu próprio.<br>
         <br>
         <?php echo $final; ?>
     </body>
