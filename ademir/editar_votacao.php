@@ -11,7 +11,7 @@ $votacao = getVotacoes()[$guid];
 ?>
 <html>
     <head>
-        <title>Gerenciando votações</title>
+        <title>Editando votação</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../backend/estilo.css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -20,7 +20,7 @@ $votacao = getVotacoes()[$guid];
     </head>
     <body>
         <center>
-            <h1>Gerenciando votações</h1>
+            <h1>Editando votação do <?php echo $votacao["ano"]; ?>º Ano</h1>
             <br>
             <div class="big">
                 <a class="buttonlink btnorange bigbtn" href="..">Página inicial</a><br>

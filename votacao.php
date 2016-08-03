@@ -30,6 +30,10 @@ if (count($calendarios) == 0) {
         $b = count($calendario["bom"]);
         $a = count($calendario["aceitavel"]);
         $r = count($calendario["ruim"]);
+        $totalvotos = $b+$a+$r;
+        $pbom = round($b/$totalvotos*100);
+        $paceitavel = round($a/$totalvotos*100);
+        $pruim = round($r/$totalvotos*100);
         $bom = "<a class=\"buttonlink smallbtn\"
             href=\"useractions/votar.php?votid=$guid&autor=$moodle&opiniao=bom\">bom</a>";
         $aceitavel = "<a class=\"buttonlink btnorange smallbtn\"
@@ -48,7 +52,11 @@ if (count($calendarios) == 0) {
         $final .= "</div><br>O que você achou desse calendário?<br>
         <table>
             <tr><td>$bom</td><td>$aceitavel</td><td>$ruim</td></tr>
-            <tr style=\"text-align: center;\"><td>$b</td><td>$a</td><td>$r</td></tr>
+            <tr style=\"text-align: center;\">
+                <td class=\"bom\">$pbom%</td>
+                <td class=\"aceitavel\">$paceitavel%</td>
+                <td class=\"ruim\">$pruim%</td>
+            </tr>
         </table><br><br><hr>";
     }
     $final .= "<br>Nenhum desses calendários ficou bom?<br>

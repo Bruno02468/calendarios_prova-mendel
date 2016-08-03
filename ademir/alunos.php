@@ -23,6 +23,7 @@ require_login();
                 <br>
                 <a class="buttonlink btnorange bigbtn" href=".">Voltar</a><br>
                 <br>
+                <a class="buttonlink btnblue bigbtn" href="mover_aluno.php">Mover/mudar ID de um aluno</a><br>
                 <br>
                 Setar aluno:<br>
                 <br>

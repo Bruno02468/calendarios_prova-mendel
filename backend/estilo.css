@@ -489,15 +489,15 @@ tt, code, kbd, samp {
     padding-bottom: 5px;
 }
 
-.bom td {
+.bom, .bom td {
     color: #67F03A;
 }
 
-.aceitavel td {
+.aceitavel, .aceitavel td {
     color: #F5901D;
 }
 
-.ruim td {
+.ruim, .ruim td {
     color: #FF3030;
 }
 

@@ -22,7 +22,7 @@ foreach ($votacoes as $guid => $votacao) {
 ?>
 <html>
     <head>
-        <title>Gerenciando votações</title>
+        <title>Gerenciar votações</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../backend/estilo.css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -31,7 +31,7 @@ foreach ($votacoes as $guid => $votacao) {
     </head>
     <body>
         <center>
-            <h1>Gerenciando votações</h1>
+            <h1>Gerenciar votações</h1>
             <br>
             <div class="big">
                 <a class="buttonlink btnorange bigbtn" href="..">Página inicial</a><br>
@@ -39,43 +39,9 @@ foreach ($votacoes as $guid => $votacao) {
                 <a class="buttonlink btnorange bigbtn" href=".">Voltar</a><br>
                 <br>
                 <br>
-                Iniciar uma votação:<br>
+                <a class="buttonlink btngreen bigbtn" href="criar_votacao.php">Iniciar votação</a><br>
                 <br>
-                <form method="POST" action="atuadores/adiciona_votacao.php">
-                    Informações essenciais:<br>
-                    Ano:
-                    <select name="ano">
-                        <option value="1">1°</option>
-                        <option value="2">2°</option>
-                        <option value="2">3°</option>
-                    </select>
-                    <br>
-                    Período:
-                    <select name="periodo">
-                        <option value="1">1°</option>
-                        <option value="2">2°</option>
-                        <option value="3">3°</option>
-                        <option value="4">4°</option>
-                    </select>
-                    <br>
-                    Etapa:
-                    <select name="etapa">
-                        <option value="1">1ª</option>
-                        <option value="2">2ª</option>
-                    </select>
-                    <br>
-                    Período de votação:<br>
-                    Começa: <input type="date" name="comeca"><br>
-                    Termina: <input type="date" name="termina"><br>
-                    <br>
-                    Dias de prova:<br>
-                    1º: <input type="date" name="dia1"><br>
-                    2º: <input type="date" name="dia2"><br>
-                    3º: <input type="date" name="dia3"><br>
-                    4º: <input type="date" name="dia4"><br>
-                    <br>
-                    <input class="buttonlink btnblue" type="submit" value="Iniciar uma votação!">
-                </form>
+                <br>
                 Votações existentes:<br>
                 <br>
                 <?php echo $links; ?>
