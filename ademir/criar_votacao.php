@@ -47,9 +47,11 @@ require_login();
                         <option value="2">2ª</option>
                     </select>
                     <br>
+                    <br>
                     Período de votação:<br>
                     Começa: <input type="date" name="comeca"><br>
                     Termina: <input type="date" name="termina"><br>
+                    <br>
                     <br>
                     Dias de prova:<br>
                     1º: <input type="date" name="dia1"><br>

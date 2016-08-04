@@ -48,6 +48,8 @@ if (isset($_GET["err"])) $err = $_GET["err"];
         </small>
         <br>
         <br>
+        <a class="buttonlink btnorange" href="../votacao.php?guid=<?php echo $guid; ?>">Voltar à votação</a><br>
+        <br>
         <br>
         Ninguém sugeriu um calendário de que você gostou?<br>
         Sem problema, crie o seu próprio!<br>
