@@ -17,10 +17,11 @@ if (strtotime($votacao["termina"]) < time()) {
 
 $final = "";
 if (count($calendarios) == 0) {
-    $final = "Nenhum calendário foi sugerido ainda.<br>
+    $final = "<br>Nenhum calendário foi sugerido ainda.<br>
         <b>É a sua chance de brilhar, <a href=\"useractions/criar.php?votid=$guid\">crie o primeiro!</a></b>";
 } else {
-    $final = "<a class=\"buttonlink btngreen\" href=\"useractions/criar.php?votid=$guid\">
+    $final = "<b>Procure maximizar sua opinião votando em <u>todos</u> os calendários!</b><br>
+        <br><a class=\"buttonlink btngreen\" href=\"useractions/criar.php?votid=$guid\">
         Sugerir um calendário</a><br><br><br>";
     foreach ($calendarios as $moodle => $calendario) {
         $n = 0;
@@ -85,11 +86,11 @@ if (count($calendarios) == 0) {
         </small>
         <br>
         <br>
+        <a class="buttonlink btnorange" href=".">Voltar às votações</a><br>
+        <br>
         <br>
         Esta votação será usada para definir o calendário de provas para a
         <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br>
-        <br>
-        <b>Procure maximizar sua opinião votando em <u>todos</u> os calendários!</b><br>
         <br>
         <?php echo $final; ?>
     </body>
