@@ -52,6 +52,7 @@ if (isset($_GET["err"])) $err = $_GET["err"];
         Ninguém sugeriu um calendário de que você gostou?<br>
         Sem problema, crie o seu próprio!<br>
         <br>
+        Mas antes, <b>vote em todos os calendários</b>, a sua opinião é vital!<br>
         <br>
         <form method="POST" action="atuadores/cria.php" onsubmit="return checar();">
             <div class="diamaker" id="dia1">

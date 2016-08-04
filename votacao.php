@@ -9,6 +9,7 @@ $periodo = $votacao["periodo"];
 $etapa = $votacao["etapa"];
 $dias = $votacao["dias"];
 $calendarios = ordenarCalendarios($votacao["calendarios"]);
+$alunos = getAlunos();
 
 if (strtotime($votacao["termina"]) < time()) {
     redir("resultados.php?guid=$guid");
@@ -23,10 +24,11 @@ if (count($calendarios) == 0) {
         Sugerir um calendário</a><br><br><br>";
     foreach ($calendarios as $moodle => $calendario) {
         $n = 0;
-        $autor = getAlunos()[$moodle];
+        $autor = $alunos[$moodle];
         $nome = $autor["nome"];
         $sala = $autor["ano"] . "º " . $autor["sala"];
-        $final .= "Sugerido por <b>$nome</b> ($sala):<br><br><div class=\"sugestao\" id=\"$moodle\">";
+        $elemid = $autor["ano"] . $autor["sala"] . $autor["chamada"];
+        $final .= "<span id=\"$elemid\">Sugerido por <b>$nome</b> ($sala):</span><br><br><div class=\"sugestao\">";
         $b = count($calendario["bom"]);
         $a = count($calendario["aceitavel"]);
         $r = count($calendario["ruim"]);
@@ -86,6 +88,8 @@ if (count($calendarios) == 0) {
         <br>
         Esta votação será usada para definir o calendário de provas para a
         <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br>
+        <br>
+        <b>Procure maximizar sua opinião votando em <u>todos</u> os calendários!</b><br>
         <br>
         <?php echo $final; ?>
     </body>

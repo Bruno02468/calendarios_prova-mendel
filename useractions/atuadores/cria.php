@@ -3,6 +3,7 @@
 include("../../backend/sistema.php");
 
 $votacoes = getVotacoes();
+$alunos = getAlunos();
 
 function fail($str) {
     $guid = req_post("guid");
@@ -39,7 +40,6 @@ for ($dia = 1; $dia <= 4; $dia++) {
 }
 
 foreach ($votacoes[$guid]["calendarios"] as $calendario) {
-    $autor = $calendario["autor"];
     $iguais = true;
     for ($dia = 0; $dia < 4; $dia++) {
         if ($dias[$dia] !== $calendario["dias"][$dia]) {
@@ -48,7 +48,9 @@ foreach ($votacoes[$guid]["calendarios"] as $calendario) {
         }
     }
     if ($iguais) {
-        fail("Um <a href=\"../votacao.php?guid=$guid#$autor\">calendário equivalente</a> já existe!");
+        $autor = $alunos[$calendario["autor"]];
+        $elemid = $autor["ano"] . $autor["sala"] . $autor["chamada"];
+        fail("Um <a href=\"../votacao.php?guid=$guid#$elemid\">calendário equivalente</a> já existe!");
         break;
     }
 }
@@ -65,6 +67,6 @@ $calendario = array(
 $votacoes[$guid]["calendarios"][$moodle] = $calendario;
 setVotacoes($votacoes);
 
-redir("../../votacao.php?guid=$guid#$moodle");
+redir("../../votacao.php?guid=$guid#${ano}${sala}${chamada}");
 
 ?>

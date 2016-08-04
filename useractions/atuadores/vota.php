@@ -40,6 +40,6 @@ array_push($votacoes[$guid]["calendarios"][$autor][$opiniao], $moodle);
 
 setVotacoes($votacoes);
 
-redir("../../votacao.php?guid=$guid#$moodle");
+redir("../../votacao.php?guid=$guid#${ano}${sala}${chamada}");
 
 ?>
