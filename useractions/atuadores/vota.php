@@ -26,7 +26,7 @@ $moodle = req_post("alunid");
 $ano = req_post("sala")[0];
 $sala = req_post("sala")[1];
 $chamada = req_post("chamada");
-$primeiro_nome = req_post("primeironome");
+$primeiro_nome = trim(req_post("primeironome"));
 
 if (!alunoCorreto($primeiro_nome, $ano, $sala, $chamada, $moodle)) fail("Dados de aluno incorretos!");
 
