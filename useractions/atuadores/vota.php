@@ -11,6 +11,8 @@ $possiveis = array("bom", "aceitavel", "ruim");
 
 function fail($str) {
     $guid = req_post("guid");
+    $autor = req_post("autor");
+    $opiniao = req_post("opiniao");
     redir("../votar.php?votid=$guid&autor=$autor&opiniao=$opiniao&err=$str");
 }
 
