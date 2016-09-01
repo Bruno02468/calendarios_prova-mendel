@@ -24,6 +24,7 @@ foreach(getMaterias() as $nome => $materia) {
 
 $salas = "";
 foreach (getSalas() as $sala) {
+    if ($sala[0] != $ano) continue;
     $salas .= "<option value=\"$sala\">" . $sala[0] . "º " . $sala[1] . "</option>";
 }
 
@@ -94,7 +95,7 @@ if (isset($_GET["err"])) $err = $_GET["err"];
                     <td><input id="chamada" name="chamada" type="number" min="1"></td>
                 </tr>
                 <tr>
-                    <td>Seu primeiro nome: </td>
+                    <td>Primeira parte do seu nome: </td>
                     <td><input type="text" name="primeironome" id="nome"></td>
                 </tr>
             </table>

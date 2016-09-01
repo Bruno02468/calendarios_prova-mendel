@@ -24,6 +24,7 @@ foreach(getMaterias() as $nome => $materia) {
 
 $salas = "";
 foreach (getSalas() as $sala) {
+    if ($sala[0] != $ano) continue;
     $salas .= "<option value=\"$sala\">" . $sala[0] . "º " . $sala[1] . "</option>";
 }
 
@@ -49,8 +50,11 @@ if (isset($_GET["err"])) $err = $_GET["err"];
         <br>
         <br>
         <form method="POST" action="atuadores/vota.php" onsubmit="salvar()" id="form">
+            <br>Você está prestes a escolher um calendário como o merecedor do seu voto.<br>
+            <br>Seu voto conta tanto quanto o de qualquer outro aluno da escola.<br>
+            <br>Após votar, você não pode "anular" seu voto, pode apenas mudá-lo votando em outro.<br>
             <br>
-            Confirme seus dados de aluno para votar:<br>
+            <br><b>Se estiver certo da escolha, confirme seus dados de aluno:</b><br>
             <br>
             <table class="alunoform">
                 <tr>
@@ -66,14 +70,13 @@ if (isset($_GET["err"])) $err = $_GET["err"];
                     <td><input id="chamada" name="chamada" type="number" min="1"></td>
                 </tr>
                 <tr>
-                    <td>Seu primeiro nome: </td>
+                    <td>Primeira parte do seu nome: </td>
                     <td><input type="text" name="primeironome" id="nome"></td>
                 </tr>
             </table>
             <br>
             <input type="hidden" name="guid" value="<?php echo req_get("votid"); ?>">
             <input type="hidden" name="autor" value="<?php echo req_get("autor"); ?>">
-            <input type="hidden" name="opiniao" value="<?php echo req_get("opiniao"); ?>">
             <div id="err"><?php echo $err; ?>&nbsp;</div>
             <input class="buttonlink bigbtn" type="submit" value="Votar!">
         </form>

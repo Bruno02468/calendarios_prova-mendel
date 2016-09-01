@@ -6,17 +6,12 @@ $votacoes = getVotacoes();
 
 $guid = req_post("guid");
 $autor = req_post("autor");
-$opiniao = req_post("opiniao");
-$possiveis = array("bom", "aceitavel", "ruim");
 
 function fail($str) {
     $guid = req_post("guid");
     $autor = req_post("autor");
-    $opiniao = req_post("opiniao");
-    redir("../votar.php?votid=$guid&autor=$autor&opiniao=$opiniao&err=$str");
+    redir("../votar.php?votid=$guid&autor=$autor&err=$str");
 }
-
-if (!in_array($opiniao, $possiveis)) fail("Hackear é feio!");
 
 if (strtotime($votacoes[$guid]["termina"]) < time()) {
     fail("Essa votação já terminou! <a href=\"../../resultados.php?guid=$guid\">Veja os resultados!</a>");
@@ -32,13 +27,7 @@ if (!alunoCorreto($primeiro_nome, $ano, $sala, $chamada, $moodle)) fail("Dados d
 
 if ($votacoes[$guid]["ano"] != $ano) fail("Você não é do " . $votacoes[$guid]["ano"] . "º ano!");
 
-foreach($possiveis as $op) {
-    if (($i = array_search($moodle, $votacoes[$guid]["calendarios"][$autor][$op])) !== false) {
-        unset($votacoes[$guid]["calendarios"][$autor][$op][$i]);
-    }
-}
-
-array_push($votacoes[$guid]["calendarios"][$autor][$opiniao], $moodle);
+$votacoes[$guid]["votos"][$moodle] = $autor;
 
 setVotacoes($votacoes);
 

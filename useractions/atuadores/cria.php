@@ -58,9 +58,7 @@ foreach ($votacoes[$guid]["calendarios"] as $calendario) {
 $calendario = array(
     "dias" => $dias,
     "autor" => $moodle,
-    "bom" => array(),
-    "aceitavel" => array(),
-    "ruim" => array(),
+    "criado" => time(),
     "deletado" => false
 );
 

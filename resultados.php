@@ -8,7 +8,7 @@ $ano = $votacao["ano"];
 $periodo = $votacao["periodo"];
 $etapa = $votacao["etapa"];
 $dias = $votacao["dias"];
-$calendarios = ordenarCalendarios($votacao["calendarios"]);
+$calendarios = $votacao["calendarios"];
 $alunos = getAlunos();
 
 if (strtotime($votacao["termina"]) > time()) {
@@ -20,14 +20,36 @@ foreach ($alunos as $moodle => $aluno) {
     if ($aluno["ano"] == $ano) $totalano++;
 }
 
-$opinioes = array("bom", "aceitavel", "ruim");
 $votaram = array();
+$votos = array();
+foreach ($votacao["votos"] as $votante => $votado) {
+    if (array_key_exists($votado, $votos)) {
+        $votos[$votado]++;
+    } else {
+        $votos[$votado] = 1;
+    }
+    if (!in_array($votante, $votaram)) {
+        array_push($votaram, $votante);
+    }
+}
+function votos($autor) {
+    global $votos;
+    if (array_key_exists($autor, $votos))
+        return $votos[$autor];
+    return 0;
+}
+
+uasort($calendarios, function($a, $b) {
+    global $votos;
+    return votos($a["autor"]) < votos($b["autor"]);
+});
+
 $criaram = array();
 $final = "";
 if (count($calendarios) == 0) {
     $final = "Nenhum calendário foi sugerido.";
 } else {
-    $final = "Os calendários sugeridos, começando pelos mais bem-avaliados:<br><br><hr>";
+    $final = "Os calendários enviados, começando pelos mais bem-avaliados:<br><br><hr>";
     foreach ($calendarios as $moodle => $calendario) {
         $n = 0;
         $autor = $alunos[$moodle];
@@ -35,17 +57,7 @@ if (count($calendarios) == 0) {
         $nome = $autor["nome"];
         $sala = $autor["ano"] . "º " . $autor["sala"];
         $final .= "Enviado por <b>$nome</b> ($sala):<br><br><div class=\"sugestao\" id=\"$moodle\">";
-        $b = count($calendario["bom"]);
-        $a = count($calendario["aceitavel"]);
-        $r = count($calendario["ruim"]);
-        
-        foreach ($opinioes as $opiniao) {
-            foreach ($calendario[$opiniao] as $vmoodle) {
-                if (!in_array($vmoodle, $votaram)) {
-                    array_push($votaram, $vmoodle);
-                }
-            }
-        }
+
 
         foreach ($dias as $dia) {
             $dat = date("d/m", strtotime($dia));
@@ -54,13 +66,7 @@ if (count($calendarios) == 0) {
                 <div>Dia $dat</div><div class=\"materias\">$materias</div></div><br><br>";
             $n++;
         }
-
-        $final .= "</div><br>O que as pessoas acharam desse calendário:<br>
-        <table>
-            <tr class=\"vot bom\"><td>Bom: </td><td>$b</td></tr>
-            <tr class=\"vot aceitavel\"><td>Aceitável: </td><td>$a</td></tr>
-            <tr class=\"vot ruim\"><td>Ruim: </td><td>$r</td></tr>
-        </table><br><br><hr>";
+        $final .= "</div><br><b>Total de votos: " . votos($moodle) . "</b><br><br><hr>";
     }
 }
 
@@ -90,7 +96,7 @@ $totalcriaram = count($criaram);
         Estes resultados serão usados para definir o calendário de provas para a
         <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br><br>
         <br>
-        Dos <b><?php echo $totalano; ?></b> alunos do ano, <b><?php echo $totalvotaram ?></b> 
+        Dos <b><?php echo $totalano; ?></b> alunos do ano, <b><?php echo $totalvotaram ?></b>
         votaram em pelo menos um calendário, e <b><?php echo $totalcriaram; ?></b>
         enviaram seu próprio.<br>
         <br>

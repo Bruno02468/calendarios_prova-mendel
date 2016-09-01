@@ -19,7 +19,8 @@ $votacoes[$guid] = array(
     "comeca" => req_post("comeca"),
     "termina" => req_post("termina"),
     "dias" => array($dia1, $dia2, $dia3, $dia4),
-    "calendarios" => $votacoes[$guid]["calendarios"]
+    "calendarios" => $votacoes[$guid]["calendarios"],
+    "votos" => $votacoes[$guid]["votos"]
 );
 
 setVotacoes($votacoes);

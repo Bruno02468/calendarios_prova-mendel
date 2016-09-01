@@ -16,7 +16,8 @@ addVotacao(array(
     "comeca" => req_post("comeca"),
     "termina" => req_post("termina"),
     "dias" => array($dia1, $dia2, $dia3, $dia4),
-    "calendarios" => array()
+    "calendarios" => array(),
+    "votos" => array()
 ));
 
 redir("../votacoes.php");

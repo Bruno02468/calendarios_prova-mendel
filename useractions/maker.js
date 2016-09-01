@@ -51,8 +51,23 @@ for (var dia = 1; dia <= 4; dia++) {
     }
 }
 
+if (window.localStorage) {
+    if (localStorage["calendario_salvo_unfail"]) {
+        var unfailed = localStorage["calendario_salvo_unfail"].split(",");
+        if (unfailed.length == selectors.length) {
+            for (var i = 0; i < selectors.length; i++) {
+                var selector = selectors[i];
+                var val = unfailed[i];
+                if ((getMateriaByNome(val) !== undefined) || (val == "none")) {
+                    selector.value = val;
+                }
+            }
+        }
+    }
+}
+
 var dias = [[], [], [], []];
-function updateSelectors(selector) {
+function updateSelectors() {
     for (var i = 0; i < materias.length; i++) {
         materias[i].selected = false;
     }
@@ -76,6 +91,14 @@ function updateSelectors(selector) {
         }
         selector.value = prevVal;
     }
+    var vals = [];
+    for (var i = 0; i < selectors.length; i++) {
+        vals.push(selectors[i].value);
+    }
+    var strvals = vals.join(",");
+    if (window.localStorage) {
+        localStorage["calendario_salvo_unfail"] = strvals;
+    }
 }
 
 function error(mensagem) {
@@ -83,6 +106,7 @@ function error(mensagem) {
 }
 
 function checar() {
+    updateSelectors();
     for (var i = 0; i < materias.length; i++) {
         if (!materias[i].selected) {
             error("Cadê a prova de " + materias[i].nome + "?");
