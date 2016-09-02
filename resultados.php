@@ -97,7 +97,7 @@ $totalcriaram = count($criaram);
         <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br><br>
         <br>
         Dos <b><?php echo $totalano; ?></b> alunos do ano, <b><?php echo $totalvotaram ?></b>
-        votaram em pelo menos um calendário, e <b><?php echo $totalcriaram; ?></b>
+        votaram em um calendário, e <b><?php echo $totalcriaram; ?></b>
         enviaram seu próprio.<br>
         <br>
         <?php echo $final; ?>
