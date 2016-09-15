@@ -51,8 +51,6 @@ if (count($calendarios) == 0) {
     $final .= "<br><br><br>Nenhum desses calendários ficou do seu agrado?<br>
         Sem problema, <a href=\"useractions/criar.php?votid=$guid\">crie o seu próprio</a>!<br><br>";
 }
-
-
 ?>
 <html>
     <head>
@@ -78,6 +76,13 @@ if (count($calendarios) == 0) {
         Esta votação será usada para definir o calendário de provas para a
         <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br>
         <br>
-        <?php echo $final; ?>
+        <?php
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            if (strpos($_SERVER["HTTP_REFERER"], "votar.php") !== false) {
+                echo "<b><u>Você votou com sucesso!</u></b><br><br>";
+            }
+        }
+        echo $final;
+        ?>
     </body>
 </html>
