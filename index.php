@@ -17,12 +17,12 @@ foreach ($votacoes as $guid => $votacao) {
     $anostamp = "<b>${ano}º ano</b> - ${periodo}º período da ${etapa}ª etapa";
 
     $timeleft = strtotime($votacao["termina"]) - strtotime(date("Y-m-d"));
-    $diasleft = ceil($timeleft / 86400);
+    $diasleft = ceil($timeleft / 86400) + 1;
 
     if ($timeleft >= 0) {
         $vots .= "<a class=\"buttonlink bigbtn\" href=\"votacao.php?guid=$guid\">$anostamp</a><br><br>";
         if ($timeleft == 0) {
-            $vots .= "(<b>último dia para votar!</b>)";
+            $vots .= "(<b>último dia para votar!</b>)<br><br><br>";
         } else {
             $vots .= "(dias restantes para votar: <b>$diasleft</b>)<br><br><br>";
         }

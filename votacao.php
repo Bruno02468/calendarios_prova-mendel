@@ -11,7 +11,9 @@ $etapa = $votacao["etapa"];
 $dias = $votacao["dias"];
 $alunos = getAlunos();
 
-if (strtotime($votacao["termina"]) < time()) {
+$timeleft = strtotime($votacao["termina"]) - strtotime(date("Y-m-d"));
+
+if ($timeleft < 0) {
     redir("resultados.php?guid=$guid");
 }
 

@@ -11,7 +11,8 @@ foreach ($votacoes as $guid => $votacao) {
     $etapa = $votacao["etapa"];
     $periodo = $votacao["periodo"];
     $fin = " <i>(em andamento)</i>";
-    if (time() > strtotime($votacao["termina"])) {
+    $timeleft = strtotime($votacao["termina"]) - strtotime(date("Y-m-d"));
+    if ($timeleft < 0) {
         $fin = " (FINALIZADA - <a href=\"../resultados.php?guid=$guid\">ver resultados</a>)";
     }
     $links .= "Votação do ${ano}º Ano - ${etapa}ª Etapa do ${periodo}º Período$fin<br>

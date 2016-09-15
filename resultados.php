@@ -11,7 +11,9 @@ $dias = $votacao["dias"];
 $calendarios = $votacao["calendarios"];
 $alunos = getAlunos();
 
-if (strtotime($votacao["termina"]) > time()) {
+$timeleft = strtotime($votacao["termina"]) - strtotime(date("Y-m-d"));
+
+if ($timeleft >= 0) {
     redir("votacao.php?guid=$guid");
 }
 
@@ -91,6 +93,8 @@ $totalcriaram = count($criaram);
             Bruno Borges Paschoalinoto</a> (ou Borginhos)
         </small>
         <br>
+        <br>
+        <a class="buttonlink btnorange" href=".">Voltar às votações</a><br>
         <br>
         <br>
         Estes resultados serão usados para definir o calendário de provas para a
