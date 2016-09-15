@@ -98,11 +98,11 @@ $totalcriaram = count($criaram);
         <br>
         <br>
         Estes resultados serão usados para definir o calendário de provas para a
-        <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br><br>
+        <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br>
         <br>
         Dos <b><?php echo $totalano; ?></b> alunos do <?php echo $ano; ?>º ano, <b><?php echo $totalvotaram ?></b>
         votaram em um calendário, e <b><?php echo $totalcriaram; ?></b>
-        enviaram seu próprio.
+        enviaram seu próprio.<br>
         <br>
         <?php echo $final; ?>
     </body>
