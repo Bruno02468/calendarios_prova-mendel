@@ -51,7 +51,7 @@ $final = "";
 if (count($calendarios) == 0) {
     $final = "Nenhum calendário foi sugerido.";
 } else {
-    $final = "Os calendários enviados, começando pelos mais bem-avaliados:<br><br><hr>";
+    $final = "Os calendários enviados, começando pelos mais votados:<br><br><hr>";
     foreach ($calendarios as $moodle => $calendario) {
         $n = 0;
         $autor = $alunos[$moodle];
@@ -100,9 +100,9 @@ $totalcriaram = count($criaram);
         Estes resultados serão usados para definir o calendário de provas para a
         <b><?php echo $etapa; ?>ª etapa do <?php echo $periodo; ?>º período.</b><br><br>
         <br>
-        Dos <b><?php echo $totalano; ?></b> alunos do ano, <b><?php echo $totalvotaram ?></b>
+        Dos <b><?php echo $totalano; ?></b> alunos do <?php echo $ano; ?>º ano, <b><?php echo $totalvotaram ?></b>
         votaram em um calendário, e <b><?php echo $totalcriaram; ?></b>
-        enviaram seu próprio.<br>
+        enviaram seu próprio.
         <br>
         <?php echo $final; ?>
     </body>
