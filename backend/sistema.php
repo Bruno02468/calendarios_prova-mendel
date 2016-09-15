@@ -194,10 +194,10 @@ function alunoCorreto($primeiro_nome, $ano, $sala, $chamada, $moodle) {
     $alunos = getAlunos();
     if (isset($alunos[$moodle])) {
         $aluno = $alunos[$moodle];
-        return explode(" ", $aluno["nome"])[0] === $primeiro_nome
-            and $aluno["ano"] === $ano
-            and $aluno["sala"] === $sala
-            and $aluno["chamada"] === $chamada;
+        return tolower(explode(" ", $aluno["nome"])[0]) === tolower($primeiro_nome)
+            and $aluno["ano"] == $ano
+            and $aluno["sala"] == $sala
+            and $aluno["chamada"] == $chamada;
     }
     return false;
 }
