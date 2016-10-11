@@ -34,7 +34,7 @@ if (count($calendarios) == 0) {
         $nome = $autor["nome"];
         $sala = $autor["ano"] . "º " . $autor["sala"];
         $elemid = $autor["ano"] . $autor["sala"] . $autor["chamada"];
-        $final .= "<span id=\"$elemid\">Enviado por <b>$nome</b> ($sala):</span><br><br><div class=\"sugestao\">";
+        $final .= "<span id=\"$elemid\">Enviado por alguém do $sala:</span><br><br><div class=\"sugestao\">";
 
         foreach ($dias as $dia) {
             $dat = date("d/m", strtotime($dia));
